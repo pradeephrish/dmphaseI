@@ -20,18 +20,95 @@ public class ParserMain {
 		//racial humar , group 30 verify
 		//http://www.snopes.com/racial/racial.asp
 		
-		//sub-links
-		//String subUrls= {"","","",""};
-		
-		
-		String url[] = {"http://www.snopes.com/racial/arts/arts.asp"};
-		
-		
-		
+		String url[] = {"http://www.snopes.com/racial/arts/arts.asp","http://www.snopes.com/racial/humor/humor.asp","http://www.snopes.com/racial/business/business.asp","http://www.snopes.com/racial/business/business.asp","http://www.snopes.com/racial/language/language.asp","http://www.snopes.com/racial/crime/crime.asp","http://www.snopes.com/racial/mistaken/mistaken.asp","http://www.snopes.com/racial/govern/govern.asp"};
 		MicrosoftTagTypes.register();
 		MasonTagTypes.register();
 		ParserMain parserMain = new ParserMain();
-		parserMain.getLinksFromMainLink(url[0]);
+		for (int i = 0; i < url.length; i++) {
+			parserMain.getLinksFromMainLink(url[i]);
+		}
+		
+		String sublinks[] = {"http://www.snopes.com/music/artists/311.asp",
+				"http://www.snopes.com/disney/films/sots.htm",
+				"http://www.snopes.com/radiotv/tv/rascals.htm",
+				"http://www.snopes.com/music/artists/presley1.asp",
+				"http://www.snopes.com/music/artists/presley3.asp",
+				"http://www.snopes.com/quotes/lauryn.htm",
+				"http://www.snopes.com/history/american/liberty.htm",
+				"http://www.snopes.comnascar.asp",
+				"http://www.snopes.comfearmost.asp",
+				"http://www.snopes.comhousefire.asp",
+				"http://www.snopes.comchurches.asp",
+				"http://www.snopes.comhilfiger.asp",
+				"http://www.snopes.comclaiborne.asp",
+				"http://www.snopes.com/business/alliance/marlboro.asp",
+				"http://www.snopes.com/business/alliance/crown.asp",
+				"http://www.snopes.com/business/alliance/troop.asp",
+				"http://www.snopes.com/business/alliance/menthol.asp",
+				"http://www.snopes.com/business/alliance/sanders.asp",
+				"http://www.snopes.com/business/alliance/snapple.asp",
+				"http://www.snopes.com/business/alliance/timberland.asp",
+				"http://www.snopes.com/business/alliance/coors.asp",
+				"http://www.snopes.comtshirts.asp",
+				"http://www.snopes.comkosher.asp",
+				"http://www.snopes.comstarbucks.asp",
+				"http://www.snopes.comcvs.asp",
+				"http://www.snopes.comsofa.asp",
+				"http://www.snopes.comarizona.asp",
+				"http://www.snopes.comcuddlewithme.asp",
+				"http://www.snopes.comourslaves.asp",
+				"http://www.snopes.com/racial/business/tropical.asp",
+				"http://www.snopes.comabercrombie.asp",
+				"http://www.snopes.com/holidays/thanksgiving/blackfriday.asp",
+				"http://www.snopes.comhilfiger.asp",
+				"http://www.snopes.comclaiborne.asp",
+				"http://www.snopes.com/business/alliance/marlboro.asp",
+				"http://www.snopes.com/business/alliance/crown.asp",
+				"http://www.snopes.com/business/alliance/troop.asp",
+				"http://www.snopes.com/business/alliance/menthol.asp",
+				"http://www.snopes.com/business/alliance/sanders.asp",
+				"http://www.snopes.com/business/alliance/snapple.asp",
+				"http://www.snopes.com/business/alliance/timberland.asp",
+				"http://www.snopes.com/business/alliance/coors.asp",
+				"http://www.snopes.comtshirts.asp",
+				"http://www.snopes.comkosher.asp",
+				"http://www.snopes.comstarbucks.asp",
+				"http://www.snopes.comcvs.asp",
+				"http://www.snopes.comsofa.asp",
+				"http://www.snopes.comarizona.asp",
+				"http://www.snopes.comcuddlewithme.asp",
+				"http://www.snopes.comourslaves.asp",
+				"http://www.snopes.com/racial/business/tropical.asp",
+				"http://www.snopes.comabercrombie.asp",
+				"http://www.snopes.com/holidays/thanksgiving/blackfriday.asp",
+				"http://www.snopes.comnames.asp",
+				"http://www.snopes.com/language/offense/picnic.htm",
+				"http://www.snopes.com/language/offense/buck.htm",
+				"http://www.snopes.com/radiotv/tv/password.htm",
+				"http://www.snopes.comhurricane.asp",
+				"http://www.snopes.comle-a.asp",
+				"http://www.snopes.com/crime/justice/grannies.asp",
+				"http://www.snopes.com/horrors/parental/mutilate.asp",
+				"http://www.snopes.com/horrors/animals/doberman.asp",
+				"http://www.snopes.comtoothbrush.asp",
+				"http://www.snopes.com/horrors/madmen/backseat.asp",
+				"http://www.snopes.com/critters/farce/wildcat.asp",
+				"http://www.snopes.com/horrors/madmen/lightout.asp",
+				"http://www.snopes.comgardener.asp",
+				"http://www.snopes.comhitfloor.asp",
+				"http://www.snopes.com/business/taxes/immigrants.asp",
+				"http://www.snopes.com/business/taxes/blacktax.asp",
+				"http://www.snopes.com/business/taxes/blackssn.asp",
+				"http://www.snopes.com/inboxer/outrage/bush.htm",
+				"http://www.snopes.com/inboxer/outrage/heritage.htm",
+				"http://www.snopes.com/inboxer/outrage/rosapark.htm",
+				"http://www.snopes.com/inboxer/outrage/nofear.htm",
+				"http://www.snopes.com/inboxer/pending/inaction.htm",
+				"http://www.snopes.com/inboxer/pending/blackcol.htm",
+				"http://www.snopes.com/inboxer/pending/voting.asp"};
+		
+		
+		
 	}
 	
 	/*
@@ -60,16 +137,10 @@ public class ParserMain {
 				//System.out.println(element2);
 				
 				String attributeValue = element2.getAttributeValue("href");
-				System.out.println(attributeValue);
-				
-				
 				if(attributeValue!=null){
 					linksToBeParsed.add("http://www.snopes.com"+attributeValue);
 					System.out.println("http://www.snopes.com"+attributeValue);
 				}
-				
-				
-				System.out.println("**********");
 			}
 			
 			
@@ -85,4 +156,7 @@ public class ParserMain {
 		
 		return linksToBeParsed;
 	}
+	
+	
+	
 }
