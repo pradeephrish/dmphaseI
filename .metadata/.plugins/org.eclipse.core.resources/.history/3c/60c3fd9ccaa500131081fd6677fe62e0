@@ -1,0 +1,10 @@
+package com.dm.model;
+
+public class SnopesModel {
+	String claim;
+	String status;
+	String example;
+	String source;
+	String label; /* yes no undefined*/
+	
+}

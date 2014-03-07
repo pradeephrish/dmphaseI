@@ -1,0 +1,17 @@
+package com.dm.parser;
+
+import java.util.List;
+
+public class ParserMain {
+	public static void main(String[] args) {
+		//racial humar , group 30 verify
+		//http://www.snopes.com/racial/racial.asp
+		String url = "http://www.snopes.com/racial/racial.asp";
+		
+	}
+	
+	public List<String> getLinksFromMainLink(String url){
+		
+		return null;
+	}
+}

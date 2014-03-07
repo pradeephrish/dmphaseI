@@ -1,0 +1,47 @@
+package com.dm.parser;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import net.htmlparser.jericho.Source;
+
+
+public class ParserMain {
+	public static void main(String[] args) {
+		//racial humar , group 30 verify
+		//http://www.snopes.com/racial/racial.asp
+		
+		//sub-links
+		//String subUrls= {"","","",""};
+		
+		ParserMain parserMain = new ParserMain();
+		parserMain.getLinksFromMainLink(url);
+	}
+	
+	/*
+	 * Let's keep it for future
+	 */
+	public List<String> getLinksFromMainLink(String url){
+		
+		try {
+			Source source = new Source(new URL(url));
+			
+			
+			System.out.println(source);
+			
+			
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+}

@@ -1,0 +1,64 @@
+package com.dm.parser;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import javax.swing.text.html.HTML.Tag;
+
+import net.htmlparser.jericho.Element;
+import net.htmlparser.jericho.HTMLElementName;
+import net.htmlparser.jericho.MasonTagTypes;
+import net.htmlparser.jericho.MicrosoftTagTypes;
+import net.htmlparser.jericho.Source;
+
+
+public class ParserMain {
+	public static void main(String[] args) {
+		//racial humar , group 30 verify
+		//http://www.snopes.com/racial/racial.asp
+		
+		//sub-links
+		//String subUrls= {"","","",""};
+		
+		
+		String url = "http://www.snopes.com/racial/arts/arts.asp";
+		
+		
+		MicrosoftTagTypes.register();
+		MasonTagTypes.register();
+		ParserMain parserMain = new ParserMain();
+		parserMain.getLinksFromMainLink(url);
+	}
+	
+	/*
+	 * Let's keep it for future
+	 */
+	public List<String> getLinksFromMainLink(String url){
+		
+		try {
+			Source source = new Source(new URL(url));
+			
+			
+			List<Element> elements = source.getAllElements(HTMLElementName.TABLE);
+			/*for (Element element : elements) {
+				System.out.println("=============");
+				System.out.println(element.toString());
+				System.out.println("=============end=");
+			}*/
+			
+			
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+}
