@@ -170,7 +170,7 @@ public class ParserMain {
 		Source source;
 		try {
 		source = new Source(new URL(url));
-		System.out.println(url);
+//		System.out.println(url);
 //		System.out.println(source.toString());
 		String nSource = source.toString().replaceAll("STYLE=\"text-align: justify; margin-left: 15px;  margin-right: 15px\"", "CLASS=\"article_text\"");
 //		System.out.println(nSource);
@@ -180,7 +180,7 @@ public class ParserMain {
 		Element element = articleClass.get(0);
 		String text = new Source(element.toString()).getTextExtractor().toString();
 		//text has everything,  substring and set the model
-		System.out.println(text);
+//		System.out.println(text);
 		
 		snopesModel = snopesModelFromText(snopesModel, text);
 		
@@ -212,13 +212,16 @@ public class ParserMain {
 	}
 	
 	private SnopesModel snopesModelFromText(SnopesModel model,String possibleText){
-		Integer exampleIndex = possibleText.indexOf("Example:");
-		if(exampleIndex==-1)
-			exampleIndex = possibleText.indexOf("Examples:");
+//		Integer exampleIndex = possibleText.indexOf("Example:");
+//		if(exampleIndex==-1)
+//			exampleIndex = possibleText.indexOf("Examples:");
+//		commented by ravindra
 		
+		Integer exampleIndex = possibleText.indexOf("Example");
 		if(exampleIndex!=-1){  //means there is example
 		
 		String claim = possibleText.substring(0, exampleIndex);
+			
 		
 		//claim text contains status in the END 
 		String[] words = claim.split(" ");
@@ -229,45 +232,66 @@ public class ParserMain {
 			status = "mixture";
 		
 		status=status.replace(".", "").toUpperCase();
-		
+
 		System.out.println(status);
 		model.setStatus(status);
 		
+		
+		claim = claim.substring(claim.indexOf(' '),claim.indexOf("Status:"));
+		claim = claim.trim();
+		model.setClaim(claim);
+		
 		Integer originsIndex = possibleText.indexOf("Origins:");
-		String example = possibleText.substring(claim.length(), originsIndex);
+		Integer egIndex = possibleText.indexOf("Example");
+
+		String example = possibleText.substring(egIndex, originsIndex);
+		example = example.substring(example.indexOf(' '));
+		example = example.trim();	
 		model.setExample(example);
+
 		Integer lastUpdated = possibleText.indexOf("Last updated:");
+		
 		String origins = possibleText.substring(originsIndex,lastUpdated);
+		origins = origins.substring(origins.indexOf(' '));
+		origins = origins.trim();
 		model.setOrigins(origins);
+		
 		System.out.println(claim);
-		System.out.println(example);
 		System.out.println(origins);
+		System.out.println(example);
+
 		
 		}else{
 			
 			Integer originsIndex = possibleText.indexOf("Origins:");
 			
 			String claim = possibleText.substring(0, originsIndex);
-			model.setClaim(claim);
+
 			
 			//claim text contains status in the END 
 			String[] words = claim.split(" ");
 			String status = words[words.length-1];
-			System.out.println("Status is "+status);
+//			System.out.println("Status is "+status);
 			//Check Status
 			if(!status.toUpperCase().contains("TRUE")&&!status.toUpperCase().contains("FALSE"))
 				status = "mixture";
 			
 			status=status.replace(".", "").toUpperCase();
 			
-			System.out.println(status);
+//			System.out.println(status);
 			model.setStatus(status);
 			
+			claim = possibleText.substring(claim.indexOf(' '),claim.indexOf("Status:"));
+			claim.trim();
+			model.setClaim(claim);
+			
 			Integer lastUpdated = possibleText.indexOf("Last updated:");
+			
 			String origins = possibleText.substring(originsIndex,lastUpdated);
+			origins = origins.substring(origins.indexOf(' '));
+			origins = origins.trim();			
 			model.setOrigins(origins);
-			System.out.println(claim);
-			System.out.println(origins);
+		
 			
 		}
 		//Note claim can start with Legend, Remember to remove Start keywords eg. Claims:, Example:, Origins:
