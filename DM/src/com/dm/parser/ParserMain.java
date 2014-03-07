@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.text.html.HTML.Tag;
 
+import com.dm.model.SnopesModel;
+
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.MasonTagTypes;
@@ -18,15 +20,17 @@ import net.htmlparser.jericho.Source;
 public class ParserMain {
 	public static void main(String[] args) {
 		//racial humar , group 30 verify
-		//http://www.snopes.com/racial/racial.asp
+		//http://www.snopes.com/racial/racial.asp , grabed sublinks from main page
 		
 		String url[] = {"http://www.snopes.com/racial/arts/arts.asp","http://www.snopes.com/racial/humor/humor.asp","http://www.snopes.com/racial/business/business.asp","http://www.snopes.com/racial/business/business.asp","http://www.snopes.com/racial/language/language.asp","http://www.snopes.com/racial/crime/crime.asp","http://www.snopes.com/racial/mistaken/mistaken.asp","http://www.snopes.com/racial/govern/govern.asp"};
 		MicrosoftTagTypes.register();
 		MasonTagTypes.register();
 		ParserMain parserMain = new ParserMain();
-		for (int i = 0; i < url.length; i++) {
+		
+		//saved links to following array, no need to parse main page again
+		/*for (int i = 0; i < url.length; i++) {
 			parserMain.getLinksFromMainLink(url[i]);
-		}
+		}*/
 		
 		String sublinks[] = {"http://www.snopes.com/music/artists/311.asp",
 				"http://www.snopes.com/disney/films/sots.htm",
@@ -107,7 +111,8 @@ public class ParserMain {
 				"http://www.snopes.com/inboxer/pending/blackcol.htm",
 				"http://www.snopes.com/inboxer/pending/voting.asp"};
 		
-		
+		//parse one url test
+		parserMain.getModelFromUrl("http://www.snopes.com/holidays/thanksgiving/blackfriday.asp");
 		
 	}
 	
@@ -157,6 +162,38 @@ public class ParserMain {
 		return linksToBeParsed;
 	}
 	
+	public SnopesModel getModelFromUrl(String url){
+		System.out.println(url);
+		SnopesModel snopesModel = new SnopesModel();
+		
+		Source source;
+		try {
+		source = new Source(new URL(url));
+		List<Element> articleClass = source.getAllElementsByClass("article_text");
+		Element element = articleClass.get(0);
+		String text = new Source(element.toString()).getTextExtractor().toString();
+		//text has everything,  substring and set the model
+		System.out.println(text);
+		//get source element
+		Element sources = source.getAllElements(HTMLElementName.DL).get(0);
+		System.out.println("^^^^^^^^^");
+		System.out.println(new Source(sources.toString()).getTextExtractor().toString().trim());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+	public static String getTextContent(Element elem) {
+	    String text = elem.getContent().toString();
+	    final List<Element> children = elem.getChildElements();
+	    for (Element child : children) {
+	    	System.out.println("Child String is ");
+	    	System.out.println(child.toString());
+	        //text = text.replace(child.toString(), "");
+	    }
+	    return text;
+	}
 	
 }
