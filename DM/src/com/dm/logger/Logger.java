@@ -40,7 +40,7 @@ public class Logger {
 				
 				BufferedWriter bw = new BufferedWriter(fw);
 
-				bw.write(new Timestamp(new Date().getTime()) + str);
+				bw.write(new Timestamp(new Date().getTime())+" :    " + str);
 				bw.newLine();
 				
 				bw.flush();
