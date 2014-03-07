@@ -6,6 +6,13 @@ public class SnopesModel {
 	String status;
 	String example;
 	
+	public SnopesModel(){
+		claim="";
+		origins="";
+		status="";
+		example="";
+		source="";
+	}
 	
 	public String getClaim() {
 		return claim;

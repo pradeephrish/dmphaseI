@@ -112,7 +112,8 @@ public class ParserMain {
 				"http://www.snopes.com/inboxer/pending/voting.asp"};
 		
 		//parse one url test
-		parserMain.getModelFromUrl("http://www.snopes.com/holidays/thanksgiving/blackfriday.asp");
+//		parserMain.getModelFromUrl("http://www.snopes.com/holidays/thanksgiving/blackfriday.asp");
+		parserMain.getModelFromUrl("http://www.snopes.com/inboxer/pending/inaction.asp");
 		
 	}
 	
@@ -163,29 +164,111 @@ public class ParserMain {
 	}
 	
 	public SnopesModel getModelFromUrl(String url){
-		System.out.println(url);
+	
 		SnopesModel snopesModel = new SnopesModel();		
 		Source source;
 		try {
 		source = new Source(new URL(url));
+		System.out.println(url);
+//		System.out.println(source.toString());
+		String nSource = source.toString().replaceAll("STYLE=\"text-align: justify; margin-left: 15px;  margin-right: 15px\"", "CLASS=\"article_text\"");
+//		System.out.println(nSource);
+		source = new Source(nSource); //replace with new div class
+//		System.out.println(source);
 		List<Element> articleClass = source.getAllElementsByClass("article_text");
 		Element element = articleClass.get(0);
 		String text = new Source(element.toString()).getTextExtractor().toString();
 		//text has everything,  substring and set the model
 		System.out.println(text);
+		
+		snopesModel = snopesModelFromText(snopesModel, text);
+		
 		//get source element
+		try{
 		Element sources = source.getAllElements(HTMLElementName.DL).get(0);
 		System.out.println("^^^^^^^^^");
 		System.out.println(new Source(sources.toString()).getTextExtractor().toString().trim());
 		String sourceString = new Source(sources.toString()).getTextExtractor().toString().trim();
 		snopesModel.setSource(sourceString);
+		}catch(IndexOutOfBoundsException indexOutOfBoundsException){
+			indexOutOfBoundsException.printStackTrace();
+			System.out.println("Doesn't have source, setting empty");
+		}
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//call logger
 			System.out.println("Failed for url : "+url); 
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("Failed for url : "+url);
 		}
-		return null;
+		return snopesModel;
+	}
+	
+	private SnopesModel snopesModelFromText(SnopesModel model,String possibleText){
+		Integer exampleIndex = possibleText.indexOf("Example:");
+		if(exampleIndex==-1)
+			exampleIndex = possibleText.indexOf("Examples:");
+		
+		if(exampleIndex!=-1){  //means there is example
+		
+		String claim = possibleText.substring(0, exampleIndex);
+		
+		//claim text contains status in the END 
+		String[] words = claim.split(" ");
+		String status = words[words.length-1];
+		System.out.println("Status is "+status);
+		//Check Status
+		if(!status.toUpperCase().contains("TRUE")&&!status.toUpperCase().contains("FALSE"))
+			status = "mixture";
+		
+		status=status.replace(".", "").toUpperCase();
+		
+		System.out.println(status);
+		model.setStatus(status);
+		
+		Integer originsIndex = possibleText.indexOf("Origins:");
+		String example = possibleText.substring(claim.length(), originsIndex);
+		model.setExample(example);
+		Integer lastUpdated = possibleText.indexOf("Last updated:");
+		String origins = possibleText.substring(originsIndex,lastUpdated);
+		model.setOrigins(origins);
+		System.out.println(claim);
+		System.out.println(example);
+		System.out.println(origins);
+		
+		}else{
+			
+			Integer originsIndex = possibleText.indexOf("Origins:");
+			
+			String claim = possibleText.substring(0, originsIndex);
+			
+			//claim text contains status in the END 
+			String[] words = claim.split(" ");
+			String status = words[words.length-1];
+			System.out.println("Status is "+status);
+			//Check Status
+			if(!status.toUpperCase().contains("TRUE")&&!status.toUpperCase().contains("FALSE"))
+				status = "mixture";
+			
+			status=status.replace(".", "").toUpperCase();
+			
+			System.out.println(status);
+			model.setStatus(status);
+			
+			Integer lastUpdated = possibleText.indexOf("Last updated:");
+			String origins = possibleText.substring(originsIndex,lastUpdated);
+			model.setOrigins(origins);
+			System.out.println(claim);
+			System.out.println(origins);
+			
+		}
+		//Note claim can start with Legend, Remember to remove Start keywords eg. Claims:, Example:, Origins:
+		
+		return model;
 	}
 	
 	public static String getTextContent(Element elem) {

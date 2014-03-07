@@ -10,12 +10,18 @@ public class TestSubModule {
 		String[] words = claim.split(" ");
 		String status = words[words.length-1];
 		
+		//Check Status
+		if(!status.equalsIgnoreCase("TRUE")||!status.equalsIgnoreCase("FALSE"))
+			status = "mixture";
+		
 		System.out.println(status);
 		
 		Integer originsIndex = possibleText.indexOf("Origins:");
 		String example = possibleText.substring(claim.length(), originsIndex);
 		Integer lastUpdated = possibleText.indexOf("Last updated:");
 		String origins = possibleText.substring(originsIndex,lastUpdated);
+		
+		//Note claim can start with Legend, Remember to remove Start keywords eg. Claims:, Example:, Origins:
 		System.out.println(claim);
 		System.out.println(example);
 		System.out.println(origins);

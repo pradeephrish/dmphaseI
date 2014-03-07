@@ -1,0 +1,5 @@
+@@@begin_claim@@@@@@end_claim@@@
+@@@begin_status@@@@@@end_status@@@
+@@@begin_example@@@@@@end_example@@@
+@@@begin_origin@@@@@@end_origin@@@
+@@@begin_sources@@@@@@end_sources@@@
