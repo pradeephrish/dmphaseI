@@ -55,13 +55,13 @@ public class SaveToFile {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			bw.write("@@@begin_claim@@@" + snopesModel.getClaim() + "@@@end_claim@@@");
 			bw.newLine();
-			bw.write("@@@begin_status@@@" + snopesModel.getClaim() + "@@@end_status@@@");
+			bw.write("@@@begin_status@@@" + snopesModel.getStatus() + "@@@end_status@@@");
 			bw.newLine();
-			bw.write("@@@begin_example@@@" + snopesModel.getClaim() + "@@@end_example@@@");
+			bw.write("@@@begin_example@@@" + snopesModel.getExample() + "@@@end_example@@@");
 			bw.newLine();
-			bw.write("@@@begin_origin@@@" + snopesModel.getClaim() + "@@@end_origin@@@");
+			bw.write("@@@begin_origin@@@" + snopesModel.getOrigins() + "@@@end_origin@@@");
 			bw.newLine();
-			bw.write("@@@begin_sources@@@" + snopesModel.getClaim() + "@@@end_sources@@@");
+			bw.write("@@@begin_sources@@@" + snopesModel.getSource() + "@@@end_sources@@@");
 			
 			bw.flush();
 			bw.close();

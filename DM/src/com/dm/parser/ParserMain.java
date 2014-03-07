@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.text.html.HTML.Tag;
 
+import com.dm.logger.Logger;
 import com.dm.model.SnopesModel;
 
 import net.htmlparser.jericho.Element;
@@ -199,11 +200,13 @@ public class ParserMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//call logger
-			System.out.println("Failed for url : "+url); 
+			System.out.println("Failed for url : "+url);
+			Logger.log(url, false);
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("Failed for url : "+url);
+			Logger.log(url, false);
 		}
 		return snopesModel;
 	}
@@ -245,6 +248,7 @@ public class ParserMain {
 			Integer originsIndex = possibleText.indexOf("Origins:");
 			
 			String claim = possibleText.substring(0, originsIndex);
+			model.setClaim(claim);
 			
 			//claim text contains status in the END 
 			String[] words = claim.split(" ");

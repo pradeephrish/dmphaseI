@@ -1,6 +1,7 @@
 package com.dm.driver;
 
 import com.dm.file.SaveToFile;
+import com.dm.logger.Logger;
 import com.dm.model.SnopesModel;
 import com.dm.parser.ParserMain;
 
@@ -69,12 +70,12 @@ public class Driver {
 				"http://www.snopes.com/crime/justice/grannies.asp",
 				"http://www.snopes.com/horrors/parental/mutilate.asp",
 				"http://www.snopes.com/horrors/animals/doberman.asp",
-				"http://www.snopes.comtoothbrush.asp",
+				"http://www.snopes.com/toothbrush.asp",
 				"http://www.snopes.com/horrors/madmen/backseat.asp",
 				"http://www.snopes.com/critters/farce/wildcat.asp",
 				"http://www.snopes.com/horrors/madmen/lightout.asp",
-				"http://www.snopes.comgardener.asp",
-				"http://www.snopes.comhitfloor.asp",
+				"http://www.snopes.com/gardener.asp",
+				"http://www.snopes.com/hitfloor.asp",
 				"http://www.snopes.com/business/taxes/immigrants.asp",
 				"http://www.snopes.com/business/taxes/blacktax.asp",
 				"http://www.snopes.com/business/taxes/blackssn.asp",
@@ -87,6 +88,7 @@ public class Driver {
 				"http://www.snopes.com/inboxer/pending/voting.asp"};
 		
 		ParserMain parserMain = new ParserMain();
+		Logger.log("Fetching Urls", true);
 		
 		for (int i = 0; i < sublinks.length; i++) {
 			String link = sublinks[i].replace("htm","asp");
