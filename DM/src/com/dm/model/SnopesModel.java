@@ -37,13 +37,7 @@ public class SnopesModel {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
+	
 	String source;
-	String label; /* yes no undefined*/
 	
 }

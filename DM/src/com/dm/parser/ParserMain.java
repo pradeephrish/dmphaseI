@@ -164,8 +164,7 @@ public class ParserMain {
 	
 	public SnopesModel getModelFromUrl(String url){
 		System.out.println(url);
-		SnopesModel snopesModel = new SnopesModel();
-		
+		SnopesModel snopesModel = new SnopesModel();		
 		Source source;
 		try {
 		source = new Source(new URL(url));
@@ -178,9 +177,13 @@ public class ParserMain {
 		Element sources = source.getAllElements(HTMLElementName.DL).get(0);
 		System.out.println("^^^^^^^^^");
 		System.out.println(new Source(sources.toString()).getTextExtractor().toString().trim());
+		String sourceString = new Source(sources.toString()).getTextExtractor().toString().trim();
+		snopesModel.setSource(sourceString);
+		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Failed for url : "+url); 
 		}
 		return null;
 	}
