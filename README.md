@@ -1,8 +1,8 @@
-<h3>**Snopes.com Web Scraper**<h3>
+<h3>**Classifier based on Data from Snopes.com**<h3>
 
 **Description:**
 
-This project is intended for collecting data from snopes.com. 
+Right now, this project is intended for collecting data from snopes.com. 
 
 Note: You should have permission from snopes.com to use data in your project. Please read terms and conditions from snopes.com for further details
 
