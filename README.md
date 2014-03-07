@@ -1,40 +1,32 @@
-Snopes.com Web Scraper
+<h3>**Snopes.com Web Scraper**<h3>
 
-This project is intended for collecting data from snopes.com 
+**Description:**
 
+This project is intended for collecting data from snopes.com. 
 
-To get started
+Note: You should have permission from snopes.com to use data in your project. Please read terms and conditions from snopes.com for further details
 
-Clone the project using git clone <Project URL>
-
-You can import it using eclipse
-
-Run main program from  com.dm.driver.Driver.java
-
-You initialiaze array of urls to be parsed as follows, 
+**Running Project**
 
 
+Clone the project using git clone <Project URL><br>You can import it using eclipse<br>Run main program from  com.dm.driver.Driver.java<br>You initialiaze array of urls to be parsed as follows, 
 eg.  
 
 	String sublinks[] = {"http://www.snopes.com/music/artists/311.asp","http://www.snopes.com/disney/films/sots.asp"}
 	
 This main funciton will parse all the urls and it will save it to data/file.txt
 
-Main method is self explanatory
+**Things Planned**
 
-
-
-********************************Future Goals***********************************************
-
--It should be able to fetch and download data from single url.
--Code doesn't handle url redirections, therefore some urls needs to be hardcoded
--Proper use of logger ( log4j or something else ) 
+-It should be able to fetch and download data from single url.<br>
+-Code doesn't handle url redirections, therefore some urls needs to be hardcoded<br>
+-Proper use of logger ( log4j or something else )<br> 
 
 
 For Any Queries, Mail us at 
 
-ppchaudh@asu.edu
-ravindra.dingankar@asu.edu
+ppchaudh@asu.edu<br>
+rdingank@asu.edu
 
 
 
