@@ -9,12 +9,12 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		String sublinks[] = {"http://www.snopes.com/music/artists/311.asp",
-				"http://www.snopes.com/disney/films/sots.htm",
-				"http://www.snopes.com/radiotv/tv/rascals.htm",
+				"http://www.snopes.com/disney/films/sots.asp",
+				"http://www.snopes.com/radiotv/tv/rascals.asp",
 				"http://www.snopes.com/music/artists/presley1.asp",
 				"http://www.snopes.com/music/artists/presley3.asp",
-				"http://www.snopes.com/quotes/lauryn.htm",
-				"http://www.snopes.com/history/american/liberty.htm",
+				"http://www.snopes.com/politics/quotes/laurynhill.asp",
+				"http://www.snopes.com/history/american/statueofliberty.asp",
 				"http://www.snopes.com/racial/humor/nascar.asp",
 				"http://www.snopes.com/racial/humor/fearmost.asp",
 				"http://www.snopes.com/racial/humor/housefire.asp",
@@ -41,9 +41,9 @@ public class Driver {
 				"http://www.snopes.com/racial/business/abercrombie.asp",
 				"http://www.snopes.com/holidays/thanksgiving/blackfriday.asp",
 				"http://www.snopes.com/racial/language/names.asp",
-				"http://www.snopes.com/language/offense/picnic.htm",
-				"http://www.snopes.com/language/offense/buck.htm",
-				"http://www.snopes.com/radiotv/tv/password.htm",
+				"http://www.snopes.com/language/offense/picnic.asp",
+				"http://www.snopes.com/language/offense/buck.asp",
+				"http://www.snopes.com/radiotv/tv/password.asp",
 				"http://www.snopes.com/racial/language/hurricane.asp",
 				"http://www.snopes.com/racial/language/le-a.asp",
 				"http://www.snopes.com/crime/justice/grannies.asp",
@@ -52,13 +52,13 @@ public class Driver {
 				"http://www.snopes.com/racial/crime/toothbrush.asp",
 				"http://www.snopes.com/horrors/madmen/backseat.asp",
 				"http://www.snopes.com/critters/farce/wildcat.asp",
-				"http://www.snopes.com/horrors/madmen/lightout.asp",
+				"http://www.snopes.com/crime/gangs/lightsout.asp",
 				"http://www.snopes.com/racial/mistaken/gardener.asp",
 				"http://www.snopes.com/racial/mistaken/hitfloor.asp",
 				"http://www.snopes.com/business/taxes/immigrants.asp",
 				"http://www.snopes.com/business/taxes/blacktax.asp",
 				"http://www.snopes.com/business/taxes/blackssn.asp",
-				"http://www.snopes.com/inboxer/outrage/bush.htm",
+				"http://www.snopes.com/inboxer/outrage/bush.asp",
 				"http://www.snopes.com/inboxer/outrage/heritage.htm",
 				"http://www.snopes.com/inboxer/outrage/rosapark.htm",
 				"http://www.snopes.com/inboxer/outrage/nofear.htm",
@@ -71,7 +71,7 @@ public class Driver {
 		
 		for (int i = 0; i < sublinks.length; i++) {
 			String link = sublinks[i].replace("htm","asp");
-			SnopesModel model = parserMain.getModelFromUrl(sublinks[i]);
+			SnopesModel model = parserMain.getModelFromUrl(link);
 			SaveToFile.saveToFile(model, sublinks[i]);
 		}
 		
