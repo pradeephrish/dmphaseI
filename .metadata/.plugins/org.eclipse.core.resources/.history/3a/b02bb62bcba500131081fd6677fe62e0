@@ -1,9 +1,0 @@
-package com.dm.file;
-
-import com.dm.model.SnopesModel;
-
-public class SaveToFile {
-	public void saveToFile(SnopesModel snopesModel,String url){
-		
-	}
-}
