@@ -234,6 +234,7 @@ public class ParserMain {
 		
 		
 		claim = claim.replace("Claim:", "").trim();
+		claim = claim.replace("Legend:","").trim();
 		
 		int sClaimIndex = claim.indexOf("Status:");
 		if(sClaimIndex!=-1)
@@ -286,7 +287,7 @@ public class ParserMain {
 			
 			
 			String sclaim = claim.replace("Claim:", "");
-			sclaim = sclaim.replace("Lengend:","").trim();
+			sclaim = sclaim.replace("Legend:","").trim();
 			sclaim = sclaim.replace(status, "");
 			
 			model.setClaim(sclaim.replace(status, ""));

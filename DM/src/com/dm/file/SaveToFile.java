@@ -32,6 +32,11 @@ public class SaveToFile {
 
 	public static void saveToFile(SnopesModel snopesModel,String url){
 		
+		
+		snopesModel=doFilteringOnSnopesModel(snopesModel);
+		
+		
+		
 //		get file name
 		int startIndex = url.indexOf('/', 15) + 1;
 		int endIndex = url.indexOf('.', url.length() - 8);
@@ -71,5 +76,23 @@ public class SaveToFile {
 		}
 		
 
+	}
+
+	private static SnopesModel doFilteringOnSnopesModel(SnopesModel snopesModel) {
+		// TODO Auto-generated method stub
+		String wordsToBeFiltered[] = {"INCORRECTLY ATTRIBUTED", "LEGEND"};
+		for (int i = 0; i < wordsToBeFiltered.length; i++) {
+			snopesModel.setClaim(snopesModel.getClaim().replace(wordsToBeFiltered[i], ""));
+		}
+		//danger
+		if(snopesModel.getClaim().endsWith("FALSE")){
+			snopesModel.setClaim(snopesModel.getClaim().substring(0,snopesModel.getClaim().lastIndexOf("FALSE")));
+		}
+		//danger
+		if(snopesModel.getClaim().endsWith("TRUE")){
+					snopesModel.setClaim(snopesModel.getClaim().substring(0,snopesModel.getClaim().lastIndexOf("TRUE")));
+		}
+		
+		return snopesModel;
 	}
 }
