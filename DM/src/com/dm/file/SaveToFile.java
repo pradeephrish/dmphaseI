@@ -66,7 +66,7 @@ public class SaveToFile {
 			bw.newLine();
 			bw.write("@@@begin_origin@@@" + snopesModel.getOrigins() + "@@@end_origin@@@");
 			bw.newLine();
-			bw.write("@@@begin_sources@@@" + snopesModel.getSource() + "@@@end_sources@@@");
+			bw.write("@@@begin_source@@@" + snopesModel.getSource() + "@@@end_source@@@");
 			
 			bw.flush();
 			bw.close();
@@ -84,6 +84,11 @@ public class SaveToFile {
 		for (int i = 0; i < wordsToBeFiltered.length; i++) {
 			snopesModel.setClaim(snopesModel.getClaim().replace(wordsToBeFiltered[i], ""));
 		}
+		
+		//for status in claim
+		if(snopesModel.getClaim().indexOf("STATUS:")!=-1)
+			snopesModel.setClaim(snopesModel.getClaim().substring(0, snopesModel.getClaim().indexOf("STATUS:")));
+		
 		//danger
 		if(snopesModel.getClaim().endsWith("FALSE")){
 			snopesModel.setClaim(snopesModel.getClaim().substring(0,snopesModel.getClaim().lastIndexOf("FALSE")));
