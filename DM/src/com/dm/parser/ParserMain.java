@@ -114,7 +114,8 @@ public class ParserMain {
 		
 		//parse one url test
 //		parserMain.getModelFromUrl("http://www.snopes.com/holidays/thanksgiving/blackfriday.asp");
-		parserMain.getModelFromUrl("http://www.snopes.com/inboxer/pending/inaction.asp");
+//		parserMain.getModelFromUrl("http://www.snopes.com/inboxer/pending/inaction.asp");
+		parserMain.getModelFromUrl("http://www.snopes.com/business/alliance/coors.asp");
 		
 	}
 	
@@ -228,16 +229,36 @@ public class ParserMain {
 		if(!status.toUpperCase().contains("TRUE")&&!status.toUpperCase().contains("FALSE"))
 			status = "mixture";
 		
+		int claimSizeIndex = claim.length();
+		
+		
+		
+		claim = claim.replace("Claim:", "").trim();
+		
+		int sClaimIndex = claim.indexOf("Status:");
+		if(sClaimIndex!=-1)
+		claim =claim.substring(0,sClaimIndex);
+		
+		model.setClaim(claim);
+
+		
 		status=status.replace(".", "").toUpperCase();
 		
 		System.out.println(status);
 		model.setStatus(status);
 		
 		Integer originsIndex = possibleText.indexOf("Origins:");
-		String example = possibleText.substring(claim.length(), originsIndex);
+		String example = possibleText.substring(claimSizeIndex, originsIndex);
+		
+		example = example.replace("Example:","");
+		example = example.replace("Examples:","").trim();
+		
 		model.setExample(example);
 		Integer lastUpdated = possibleText.indexOf("Last updated:");
 		String origins = possibleText.substring(originsIndex,lastUpdated);
+		
+		origins= origins.replace("Origins:", "").trim();
+		
 		model.setOrigins(origins);
 		System.out.println(claim);
 		System.out.println(example);
@@ -248,7 +269,7 @@ public class ParserMain {
 			Integer originsIndex = possibleText.indexOf("Origins:");
 			
 			String claim = possibleText.substring(0, originsIndex);
-			model.setClaim(claim);
+			
 			
 			//claim text contains status in the END 
 			String[] words = claim.split(" ");
@@ -263,11 +284,20 @@ public class ParserMain {
 			System.out.println(status);
 			model.setStatus(status);
 			
+			
+			String sclaim = claim.replace("Claim:", "");
+			sclaim = sclaim.replace("Lengend:","").trim();
+			sclaim = sclaim.replace(status, "");
+			
+			model.setClaim(sclaim.replace(status, ""));
+			
+			
+			
 			Integer lastUpdated = possibleText.indexOf("Last updated:");
 			String origins = possibleText.substring(originsIndex,lastUpdated);
-			model.setOrigins(origins);
-			System.out.println(claim);
-			System.out.println(origins);
+			model.setOrigins(origins.replace("Origins:", "").trim());
+			System.out.println(sclaim);
+			System.out.println(origins.replace("Origins:", "").trim());
 			
 		}
 		//Note claim can start with Legend, Remember to remove Start keywords eg. Claims:, Example:, Origins:
