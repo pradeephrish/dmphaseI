@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Vector;
+
+import org.apache.commons.io.FileUtils;
 
 import be.ac.ulg.montefiore.run.jadti.AttributeSet;
 import be.ac.ulg.montefiore.run.jadti.DecisionTree;
@@ -43,7 +46,8 @@ public class TrainingSetTest {
 
 	ItemSet testingSet = null;
 	try {
-	    testingSet = ItemSetReader.read(new FileReader(testingDbFileName));
+	    //testingSet = ItemSetReader.read(new FileReader(testingDbFileName));
+		testingSet = ItemSetReader.read(new FileReader(dbFileName));
 	} catch (FileNotFoundException e) {
 	    System.err.println("File not found : " + testingDbFileName + ".");
 	    System.err.println("This file is included in the source "
@@ -71,7 +75,14 @@ public class TrainingSetTest {
 	FileWriter fw = new FileWriter(file.getAbsoluteFile());
 	BufferedWriter bw = new BufferedWriter(fw);
 
-	for (int i = 0; i < 952; i++) {
+	Integer accuracy = 0;
+	List<String> correctLabels = FileUtils.readLines(new File("resources/label_training.txt"));
+	
+	for (int i = 0; i < 1842; i++) {
+		int predictedLabel = predictLabel(testingSet.item(i), tree);
+		if(Integer.parseInt(correctLabels.get(i))==predictedLabel)
+			++accuracy;
+		
 	    System.out
 		    .println(i + "=" + predictLabel(testingSet.item(i), tree));
 	    bw.write(predictLabel(testingSet.item(i), tree) + "");
@@ -81,8 +92,14 @@ public class TrainingSetTest {
 
 	System.out
 		.println("  952 predictions are generated in the file resources/prediction.txt ");
+	
+	System.out.println("Total number of accurate predictions : "+accuracy);
+	
     }
 
+    
+    
+    
     /*
      * Build the decision tree.
      */
